@@ -39,7 +39,7 @@ body {
         #E5002F 6deg 9deg,
         #ff6b9d 9deg 12deg,
         #E5002F 12deg 15deg,
-        #CD003F 15deg 18deg
+        #d25000 15deg 18deg
     );
     /* animation: rotateSunburst 120s linear infinite; */
     z-index: 0;
@@ -293,6 +293,78 @@ select:hover {
     padding: 50px;
 }
 
+.footer {
+    width: 100%;
+    padding: 40px 20px;
+    margin-top: 40px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h3 {
+    color: #1565c0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.copyright {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.project-links,
+.support-links {
+    list-style: none;
+    padding: 0;
+}
+
+.project-links li,
+.support-links li {
+    margin-bottom: 10px;
+}
+
+.project-links a,
+.support-links a {
+    color: #1565c0;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.project-links a:hover,
+.support-links a:hover {
+    color: #64b5f6;
+    transform: translateX(5px);
+}
+
+/* Icon styling */
+.project-links i,
+.support-links i {
+    width: 20px;
+    margin-right: 8px;
+    color: #1565c0;
+}
+
+.project-links a:hover i,
+.support-links a:hover i {
+    color: #64b5f6;
+}
 @media (max-width: 768px) {
     .title {
         font-size: 2em;
@@ -300,5 +372,14 @@ select:hover {
     
     .pokemon-image {
         height: 300px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-section {
+        text-align: center;
     }
 }
