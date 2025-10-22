@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'ITC Bolt';
+    src: url('fonts/ITC Bolt Bold Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Arial Black', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    background: #ff1744;
+}
+
+/* Rotating Sunburst Background */
+.sunburst {
+    position: fixed;
+    top: 100%;
+    left: 100%;
+    width: 400vmax;
+    height: 400vmax;
+    transform: translate(-50%, -50%);
+    background: repeating-conic-gradient(
+        from 0deg,
+        #E5002F 0deg 3deg,
+        #CD003F 3deg 6deg,
+        #E5002F 6deg 9deg,
+        #ff6b9d 9deg 12deg,
+        #E5002F 12deg 15deg,
+        #CD003F 15deg 18deg
+    );
+    /* animation: rotateSunburst 120s linear infinite; */
+    z-index: 0;
+}
+
+@keyframes rotateSunburst {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.title {
+    font-family: 'ITC Bolt', 'Arial Black', Arial, sans-serif;
+    font-size: 3.5em;
+    color: #ffeb3b;
+    text-shadow: 
+        4px 4px 0 #1565c0,
+        8px 8px 0 rgba(0,0,0,0.3);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.controls {
+    background: rgba(255,255,255,0.95);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border: 3px solid #1565c0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+select:hover {
+    border-color: #ffeb3b;
+    transform: translateY(-2px);
+}
+
+.display-container {
+    background: white;
+    padding: 40px;
+    padding-top: 5px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    /* allow the container to size to its contents (the image) - JS will clamp width to viewport */
+    width: auto;
+    max-width: calc(100% - 40px);
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* center */
+}
+
+.display-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(21,101,192,0.05) 3px, rgba(21,101,192,0.05) 6px);
+    pointer-events: none;
+}
+
+.image-display {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.pokemon-image {
+    /* let the image dictate the container width; JS will set the display-container width */
+    width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00bcd4 0%, #4dd0e1 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pokemon-image:hover {
+    transform: scale(1.02);
+}
+
+.pokemon-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: 
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+    animation: moveLines 20s linear infinite;
+}
+
+@keyframes moveLines {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+.silhouette {
+    filter: brightness(0);
+}
+
+.pokemon-image img {
+    /* Fill the container width (container is set to image natural width by JS). */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+.pokemon-name {
+    font-size: 2em;
+    color: #1565c0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin-top: 15px;
+}
+
+.episode-info {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.episode-details {
+    font-size: 1em;
+    color: #666;
+    margin-top: 5px;
+    padding: 0 20px;
+}
+
+.hint {
+    font-size: 1.5em;
+    color: #ffeb3b;
+    -webkit-text-stroke: 1px #1565c0;
+    margin-top: 10px;
+    font-weight: bold;
+    animation: bounce 2s ease-in-out infinite;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.view-mode {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.mode-btn.active {
+    background: #ffeb3b;
+    color: #1565c0;
+    box-shadow: 0 4px 12px rgba(255,235,59,0.5);
+    transform: translateY(-2px);
+}
+
+.mode-btn:not(.active) {
+    background: #e0e0e0;
+    color: #666;
+}
+
+.mode-btn:hover:not(.active) {
+    background: #bdbdbd;
+}
+
+.placeholder {
+    font-size: 1.5em;
+    color: #666;
+    padding: 50px;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2em;
+    }
+    
+    .pokemon-image {
+        height: 300px;
+    }
+}
