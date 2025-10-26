@@ -1,0 +1,5 @@
+# Python script (local helper tool)
+generate_images_manifest.py
+
+# Mac OS garbage
+.DS_Store
