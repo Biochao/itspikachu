@@ -2,6 +2,8 @@
 
 A web-based archive of silhouette and reveal frames of the classic "Who's That Pokémon?" segments from the Pokémon anime series.
 
+**Visit the site: [itspikachu.com](https://itspikachu.com)**
+
 ## Features
 
 - View Pokémon silhouettes from different anime episodes
